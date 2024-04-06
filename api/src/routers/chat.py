@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from api.my_redis.redis import Redis
 from api.schemas.chatDTO import Chat
-from api.src.dependencies.messages import messages
+from api.src.routers.dependencies.messages import messages
 from salesgpt.salesgptapi import SalesGPTAPI
 
 router = APIRouter(
