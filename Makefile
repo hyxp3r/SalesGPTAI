@@ -2,11 +2,14 @@
 #SHELL := /bin/bash
 
 # Define Python interpreter
-#PYTHON_MAC := python3
-#PYTHON_WINDOWS := python
+PYTHON_MAC := python3
 
-# Define virtual environment directory
-VENV := .venv
+VENV = .venv
+
+CODE = \
+    api \
+
+JOBS ?= 4
 
 # Default target executed when no arguments are given to make.
 default: test
@@ -24,6 +27,20 @@ setup:
 	@echo "Installing project dependencies using Poetry."
 	poetry install
 	@echo "Dependencies installed."
+
+
+makemigrations:
+	poetry run alembic revision --autogenerate
+
+migrate:
+	poetry run alembic upgrade head
+
+lint:
+	$(VENV)/bin/black --check $(CODE)
+	$(VENV)/bin/flake8 --jobs $(JOBS) --statistics $(CODE)
+
+pretty:
+	$(VENV)/bin/black --target-version py311 --skip-string-normalization $(CODE)
 
 # Clean up the environment
 clean:
