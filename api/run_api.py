@@ -1,26 +1,22 @@
-import os
-from typing import List
-
-import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
+import uvicorn
 
-#from api.config import ApiKeySettings
-from salesgpt.salesgptapi import SalesGPTAPI
 
-from src.routers.chat import router
-#api_settings = ApiKeySettings()
+from api.config import ApiKeySettings
+from src.routers.chat import router as chat_router
+from src.routers.messages import router as message_router
+from src.routers.tokens import router as token_router
+
+api_settings = ApiKeySettings()
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(token_router)
+app.include_router(message_router)
+app.include_router(chat_router)
+
 
 GPT_MODEL = "gpt-3.5-turbo-0613"
 # GPT_MODEL_16K = "gpt-3.5-turbo-16k-0613"
-
-
-@app.get("/")
-async def say_hello():
-    return {"message": "Hello World"}
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class ApiKeySettings(BaseSettings):
-    api_key:str
+    api_key: str
 
     class Config:
         env_prefix = 'OPENAI_'
