@@ -5,7 +5,7 @@ from src.service.redis import add_message_redis
 
 
 async def chat_with_sales_agent(request: MessageList, telegram_id: str) -> str:
-    sales_api = SalesGPTAPI(config_path="examples/example_agent_setup.json", verbose=True)
+    sales_api = SalesGPTAPI(config_path="api/examples/example_agent_setup.json", verbose=True)
     _, answer = sales_api.do(request.get_conversation_history_str(), request.human_say)
     human_say = Message(message=request.human_say)
     answer = Message(message=answer)

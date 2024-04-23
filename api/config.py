@@ -7,6 +7,7 @@ class ApiKeySettings(BaseSettings):
     class Config:
         env_prefix = "OPENAI_"
         env_file = ".env"
+        extra = "ignore"
 
 
 class RedisSettings(BaseSettings):
@@ -15,3 +16,4 @@ class RedisSettings(BaseSettings):
     class Config:
         env_prefix = "REDIS_"
         env_file = ".env"
+        extra = "ignore"

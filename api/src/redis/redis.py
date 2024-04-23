@@ -48,5 +48,5 @@ class RedisGPT(Redis):
         if source == "human":
             message_data["message"] = "User: " + message_data["message"] + " <END_OF_TURN>"
         elif source == "bot":
-            message_data["message"] = "Ted Lasso: " + message_data["message"] + " <END_OF_TURN>"
+            message_data["message"] = "Ted Lasso: " + message_data["message"]
         await self.connection.json().arrappend(str(token), Path(".conversation_history"), message_data)
